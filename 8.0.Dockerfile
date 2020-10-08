@@ -22,6 +22,8 @@ ENV DB_FILTER=.* \
     PIP_NO_CACHE_DIR=0 \
     PTVSD_ARGS="--host 0.0.0.0 --port 6899 --wait --multiprocess" \
     PTVSD_ENABLE=0 \
+    DEBUGPY_ARGS="--listen 0.0.0.0:6899 --wait-for-client" \
+    DEBUGPY_ENABLE=0 \
     PUDB_RDB_HOST=0.0.0.0 \
     PUDB_RDB_PORT=6899 \
     PYTHONOPTIMIZE=1 \
@@ -75,7 +77,8 @@ RUN ln -s /usr/bin/nodejs /usr/local/bin/node \
     && rm -Rf ~/.npm /tmp/*
 
 # Special case to get bootstrap-sass, required by Odoo for Sass assets
-RUN gem install --no-rdoc --no-ri --no-update-sources bootstrap-sass --version '<3.4' \
+RUN gem install --no-rdoc --no-ri --no-update-sources autoprefixer-rails --version '<9.8.6' \
+    && gem install --no-rdoc --no-ri --no-update-sources bootstrap-sass --version '<3.4' \
     && rm -Rf ~/.gem /var/lib/gems/*/cache/
 
 # Other facilities
@@ -85,6 +88,7 @@ RUN pip install \
         git-aggregator \
         plumbum \
         ptvsd \
+        debugpy \
         pudb \
         virtualenv \
         wdb \
