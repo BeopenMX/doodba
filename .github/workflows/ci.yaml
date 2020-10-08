@@ -51,7 +51,7 @@ jobs:
       # Indicates what's the equivalent to tecnativa/doodba:latest image
       LATEST_RELEASE: "14.0"
       # Variables found by default in Docker Hub builder
-      DOCKER_REPO: tecnativa/doodba
+      DOCKER_REPO: itpp-labs/doodba
       DOCKER_TAG: ${{ matrix.odoo_version }}
       GIT_SHA1: ${{ github.sha }}
       # Other variables to configure tests and execution environment
@@ -75,7 +75,7 @@ jobs:
           REGISTRY_USERNAME: ${{ secrets.dockerhub_username }}
         run: ./hooks/push
       - name: push to github registry
-        if: github.repository == 'Tecnativa/doodba' && github.ref == 'refs/heads/master'
+        if: github.repository == 'itpp-labs/doodba' && github.ref == 'refs/heads/master'
         env:
           DOCKER_REPO_SUFFIX: /doodba
           REGISTRY_HOST: docker.pkg.github.com
